@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'jacoco'
+apply plugin: "com.github.dawnwords.jacoco.badge"
 
 android {
     compileSdkVersion compileSDKVersionValue
@@ -11,7 +13,7 @@ android {
     defaultConfig {
         applicationId "br.com.mateus.githubrepositories"
 
-        versionCode 2
+        versionCode 3
         versionName "1.0.1"
 
         minSdkVersion minSDKVersionValue
@@ -31,6 +33,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
         }
     }
 }
@@ -56,9 +61,6 @@ dependencies {
     implementation android_deps.navigation_fragment
     implementation android_deps.navigation_runtime
     implementation android_deps.paging
-    implementation android_deps.room_runtime
-    implementation android_deps.room_ktx
-    kapt android_deps.room_compiler
 
     //Koin
     implementation koin_deps.koin
@@ -82,5 +84,15 @@ dependencies {
     testImplementation test_deps.test_core
     testImplementation test_deps.koin_test
     testImplementation test_deps.coroutines_test
+    androidTestImplementation test_deps.test_runner
+    androidTestImplementation test_deps.test_rules
+    androidTestImplementation test_deps.espresso_core
+    androidTestImplementation test_deps.espresso_contrib
 
+}
+
+jacocoBadgeGenSetting {
+    jacocoReportPath  "$buildDir/reports/coverage/debug/report.xml"
+    readmePath "$rootDir/README.md"
+    limit = ['instruction': 0, 'branch': 0, 'line': 0, 'method': 0, 'class': 0]
 }

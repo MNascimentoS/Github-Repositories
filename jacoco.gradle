@@ -1,0 +1,71 @@
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+private static boolean isAndroidModule(Project project) {
+    boolean isAndroidLibrary = project.plugins.hasPlugin('com.android.library')
+    boolean isAndroidApp = project.plugins.hasPlugin('com.android.application')
+    return isAndroidLibrary || isAndroidApp
+}
+
+afterEvaluate { project ->
+    if (isAndroidModule(project)) setupAndroidReporting()
+    else setupKotlinReporting()
+}
+
+def setupKotlinReporting() {
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            csv.enabled false // change if needed
+            xml.enabled true
+            xml.destination file("${rootProject.projectDir}/build/reports/jacoco/report.xml")
+            html {
+                enabled true
+                destination file("${buildDir}/coverage-report")
+            }
+        }
+    }
+}
+
+def setupAndroidReporting() {
+    tasks.withType(Test) {
+        // Whether or not classes without source location should be instrumented
+        jacoco.includeNoLocationClasses true
+    }
+    task jacocoTestReport(
+            type: JacocoReport,
+            dependsOn: ['testDebugUnitTest']
+    ) {
+        reports {
+            csv.enabled false
+            xml {
+                enabled true
+                destination file("${rootProject.projectDir}/build/reports/jacoco/report.xml")
+            }
+            html {
+                enabled true
+                destination file("${buildDir}/coverage-report")
+            }
+        }
+        // Change as needed
+        def fileFilter = [
+
+        ]
+        def debugTree = fileTree(
+                dir: "$buildDir/tmp/kotlin-classes/debug",
+                excludes: fileFilter
+        )
+        def mainSrc = "$projectDir/src/main/java"
+        sourceDirectories.from = files([mainSrc])
+        classDirectories.from = files([debugTree])
+        executionData.from = fileTree(
+                dir: project.buildDir,
+                includes: [
+                        'jacoco/testDebugUnitTest.exec',
+                        'outputs/code-coverage/connected/*coverage.ec'
+                ]
+        )
+    }
+}

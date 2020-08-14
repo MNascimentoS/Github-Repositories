@@ -14,6 +14,12 @@ platform :android do
     gradle(task: "test")
   end
 
+  desc "Create Coverage Report and Updates ReadMe"
+    lane :coverage_report do
+      gradle(task: "createDebugCoverageReport")
+      gradle(task: "generateJacocoBadge")
+    end
+
   desc "Build App"
   lane :bundle_release do |options|
     gradle(

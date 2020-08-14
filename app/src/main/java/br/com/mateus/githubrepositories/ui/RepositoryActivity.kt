@@ -23,12 +23,10 @@ class RepositoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
-        if (!BuildConfig.DEBUG) {
-            AppCenter.start(
-                application, BuildConfig.APPCENTER_KEY,
-                Analytics::class.java, Crashes::class.java, Distribute::class.java
-            )
-        }
+        AppCenter.start(
+            application, BuildConfig.APPCENTER_KEY,
+            Analytics::class.java, Crashes::class.java, Distribute::class.java
+        )
         initObservers()
     }
 

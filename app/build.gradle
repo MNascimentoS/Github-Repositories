@@ -1,19 +1,28 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    compileSdkVersion compileSDKVersionValue
+    buildToolsVersion buildToolsVersionValue
 
     defaultConfig {
         applicationId "br.com.mateus.githubrepositories"
-        minSdkVersion 21
-        targetSdkVersion 30
+
         versionCode 1
         versionName "1.0"
 
+        minSdkVersion minSDKVersionValue
+        targetSdkVersion targetSDKVersionValue
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -26,12 +35,49 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //Kotlin
+    implementation kotlin_deps.stdlib
+    implementation kotlin_deps.coroutines
+
+    //Google
+    implementation google_deps.material
+
+    //Android
+    implementation android_deps.core
+    implementation android_deps.app_compat
+    implementation android_deps.coordinator_layout
+    implementation android_deps.constraint_layout
+    implementation android_deps.view_model_ktx
+    implementation android_deps.lifecycle_extensions
+    implementation android_deps.navigation_ui
+    implementation android_deps.navigation_fragment
+    implementation android_deps.navigation_runtime
+    implementation android_deps.paging
+    implementation android_deps.room_runtime
+    implementation android_deps.room_ktx
+    kapt android_deps.room_compiler
+
+    //Koin
+    implementation koin_deps.koin
+    implementation koin_deps.core
+    implementation koin_deps.view_model
+
+    //AppCenter
+    implementation app_center_deps.analytics
+    implementation app_center_deps.distribute
+
+    //Third party
+    implementation third_deps.retrofit
+    implementation third_deps.retrofit_gson
+    implementation third_deps.circle_image_view
+    implementation third_deps.picasso
+
+    //Test
+    testImplementation test_deps.junit
+    testImplementation test_deps.mockk
+    testImplementation test_deps.test_core
+    testImplementation test_deps.koin_test
+    testImplementation test_deps.coroutines_test
 
 }

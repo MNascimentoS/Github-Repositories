@@ -1,0 +1,94 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext {
+    compileSDKVersionValue = 30
+    buildToolsVersionValue = "29.0.3"
+    minSDKVersionValue = 21
+    targetSDKVersionValue = 30
+
+    versions = [
+            kotlin           : '1.3.61',
+            kotlinx          : '1.3.2',
+            core             : '1.1.0',
+            constraint       : '1.1.3',
+            room             : '2.2.2',
+            paging           : '2.1.2',
+            play_services    : '17.0.0',
+            material         : '1.0.0',
+            appcenter        : '2.3.0',
+            koin             : '2.0.1',
+            navigation       : '2.1.0',
+            retrofit         : '2.9.0',
+            circle_image_view: '3.1.0',
+            picasso          : '2.71828',
+            shimmer          : '0.5.0',
+
+            junit            : '4.12',
+            test_core        : '2.0.1',
+            androidx_runner  : '1.2.0',
+            expresso         : '3.2.0',
+            espresso_core    : '3.2.0',
+            test_extensions  : '1.1.1',
+            koin_test        : '2.0.1',
+            coroutines_test  : '1.3.2',
+            mockito_kotlin   : '2.2.0',
+            mockito          : '2.28.2',
+            mockk            : '1.9',
+            view_model_ktx   : '2.2.0'
+    ]
+
+    kotlin_deps = [
+            stdlib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
+            coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlinx}",
+    ]
+
+    google_deps = [
+            material: "com.google.android.material:material:${versions.material}",
+    ]
+
+    android_deps = [
+            coordinator_layout  : "androidx.coordinatorlayout:coordinatorlayout:${versions.coordinator_layout}",
+            lifecycle_extensions: "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle_extensions}",
+            view_model_ktx      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.view_model_ktx}",
+            navigation_fragment : "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
+            navigation_ui       : "androidx.navigation:navigation-ui-ktx:${versions.navigation}",
+            navigation_runtime  : "androidx.navigation:navigation-runtime-ktx:${versions.navigation}",
+            core                : "androidx.core:core-ktx:${versions.core}",
+            app_compat          : "androidx.appcompat:appcompat:${versions.core}",
+            constraint_layout   : "androidx.constraintlayout:constraintlayout:${versions.constraint}",
+            paging              : "androidx.paging:paging-runtime:${versions.paging}",
+            room_runtime        : "androidx.room:room-runtime:${versions.room}",
+            room_compiler       : "androidx.room:room-compiler:${versions.room}",
+            room_ktx            : "androidx.room:room-ktx:${versions.room}",
+    ]
+
+    app_center_deps = [
+            analytics : "com.microsoft.appcenter:appcenter-analytics:${versions.appcenter}",
+            distribute: "com.microsoft.appcenter:appcenter-distribute:${versions.appcenter}"
+    ]
+
+    koin_deps = [
+            koin      : "org.koin:koin-android:${versions.koin}",
+            core      : "org.koin:koin-core:${versions.koin}",
+            view_model: "org.koin:koin-androidx-viewmodel:${versions.koin}",
+    ]
+
+    third_deps = [
+            retrofit         : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+            retrofit_gson    : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+            circle_image_view: "de.hdodenhof:circleimageview:${versions.circle_image_view}",
+            picasso          : "com.squareup.picasso:picasso:${versions.picasso}"
+    ]
+
+    test_deps = [
+            junit          : "junit:junit:${versions.junit}",
+            mockk          : "io.mockk:mockk:${versions.mockk}",
+            test_core      : "androidx.arch.core:core-testing:${versions.test_core}",
+            koin_test      : "org.koin:koin-test:${versions.koin_test}",
+            coroutines_test: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines_test}"
+    ]
+
+
+}

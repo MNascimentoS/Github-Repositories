@@ -8,5 +8,12 @@ fun Item.toRepository() =
         id = id,
         name = name,
         description = description,
-        imageUrl = owner.avatar_url
+        ownerName = owner.login,
+        ownerType = owner.type,
+        imageUrl = owner.avatar_url,
+        repositoryUrl = html_url,
+        stars = stargazers_count,
+        watchers = watchers,
+        forks = forks,
+        issues = open_issues
     )

@@ -18,4 +18,8 @@ class RepositoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_repository)
     }
 
+    companion object {
+        const val CARD_TRANSITION = "card"
+    }
+
 }

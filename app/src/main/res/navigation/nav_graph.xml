@@ -12,11 +12,7 @@
         tools:layout="@layout/fragment_repository_list">
         <action
             android:id="@+id/action_repositoryListFragment_to_repositoryDetailsFragment"
-            app:destination="@id/repositoryDetailsFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/repositoryDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/repositoryDetailsFragment"

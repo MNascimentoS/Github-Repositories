@@ -1,0 +1,97 @@
+# load variables from .env file in the root if it exists
+if File.exist?('.env')
+  open('.env', 'r').readlines.each do |l|
+    kv = l.split('=')
+    ENV[kv[0]] = kv[1].chomp
+  end
+end
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Build App"
+  lane :bundle_release do |options|
+    gradle(
+      task: "app:bundle",
+      build_type: "Release",
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => options[:signing_config_file],
+        "android.injected.signing.store.password" => options[:signing_config_store_password],
+        "android.injected.signing.key.alias" => options[:signing_config_key_alias],
+        "android.injected.signing.key.password" => options[:signing_config_key_password],
+      }
+    )
+  end
+
+  desc "Build App"
+  lane :build do |options|
+    gradle(
+      task: "app:assemble",
+      build_type: "Release",
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => options[:signing_config_file],
+        "android.injected.signing.store.password" => options[:signing_config_store_password],
+        "android.injected.signing.key.alias" => options[:signing_config_key_alias],
+        "android.injected.signing.key.password" => options[:signing_config_key_password],
+      }
+    )
+  end
+
+  desc "Deploy a new version to the AppCenter"
+  lane :appcenter do
+    appcenter_upload(
+      api_token: ENV["APP_CENTER_API_TOKEN"],
+      owner_type: "organization",
+      owner_name: ENV["APPCENTER_OWNER_NAME"],
+      app_os: 'Android',
+      app_platform: "Java",
+      app_name: ENV["APPCENTER_APP_NAME"],
+      app_display_name: ENV["APPCENTER_DISPLAY_NAME"],      
+      file: ENV["APPCENTER_DISTRIBUTE_APK"],
+      destinations: ENV["APP_CENTER_DESTINATIONS"],
+      notify_testers: ENV["APPCENTER_ALERT"]
+    )
+  end
+
+  desc "Build and Deploy a new version to the AppCenter"
+  lane :appcenter_build do |options|
+    gradle(
+      task: "app:assemble",
+      build_type: "Debug",
+      print_command: false
+    )
+    appcenter
+  end
+
+  desc "Deploy a new bundle version to the Google Play in any track"
+  lane :google_play do |options|
+    upload_to_play_store(track: options[:track], aab: 'app/build/outputs/bundle/release/app-release.aab')
+  end
+
+  desc "Deploy a new apk version to the Google Play in any track"
+  lane :google_play_apk do |options|
+    upload_to_play_store(track: options[:track], apk_paths: ["app/build/outputs/apk/release/ib-release.apk"])
+  end
+
+  lane :post_to_slack do |options|
+    slack_url   = options[:slack_url]
+    app         = options[:app]
+    version     = options[:version]
+    build       = options[:build]
+    ref         = options[:ref]
+    upload      = options[:upload]
+    slack(
+      slack_url: "#{slack_url}",
+      default_payloads: [], # reduce the notification to the minimum
+      message: "*#{app.strip} - ref: #{ref.strip}* new :android: *(#{build.strip})* has been submitted to *#{upload}* and will be available soon :rocket:",
+    )
+  end
+
+end

@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "br.com.mateus.githubrepositories"
 
-        versionCode 3
+        versionCode 4
         versionName "1.0.1"
 
         minSdkVersion minSDKVersionValue
@@ -61,6 +61,7 @@ dependencies {
     implementation android_deps.navigation_fragment
     implementation android_deps.navigation_runtime
     implementation android_deps.paging
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //Koin
     implementation koin_deps.koin
@@ -75,7 +76,6 @@ dependencies {
     //Third party
     implementation third_deps.retrofit
     implementation third_deps.retrofit_gson
-    implementation third_deps.circle_image_view
     implementation third_deps.picasso
 
     //Test

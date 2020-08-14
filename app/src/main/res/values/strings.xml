@@ -10,4 +10,5 @@
     <string name="cd_amount_forks_rep">Quantidade de forks do repositório</string>
     <string name="cd_amount_stars_rep">Quantidade de stars do repositório</string>
     <string name="cd_amount_watchers_rep">Quantidade de watchers do repositório</string>
+    <string name="error_load_repositories">Não foi possível encontrar os repositórios.</string>
 </resources>

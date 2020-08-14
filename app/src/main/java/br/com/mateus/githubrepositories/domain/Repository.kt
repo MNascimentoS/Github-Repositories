@@ -1,6 +1,12 @@
 package br.com.mateus.githubrepositories.domain
 
-data class Repository(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Repository (
     val id: Int,
-    val name: String
-)
+    val name: String,
+    val description: String?,
+    val imageUrl: String
+) : Parcelable

@@ -4,6 +4,6 @@
     android:id="@+id/repositoryRCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scenes.repositoryList.ui.RepositoryListActivity"
+    tools:context=".ui.RepositoryActivity"
     tools:listitem="@layout/item_github_repository"
     tools:itemCount="5"/>

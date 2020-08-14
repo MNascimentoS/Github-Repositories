@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion compileSDKVersionValue
@@ -70,6 +71,7 @@ dependencies {
     implementation third_deps.retrofit
     implementation third_deps.retrofit_gson
     implementation third_deps.circle_image_view
+    implementation third_deps.picasso
 
     //Test
     testImplementation test_deps.junit

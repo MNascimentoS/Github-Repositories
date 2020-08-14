@@ -22,6 +22,7 @@ ext {
             navigation       : '2.1.0',
             retrofit         : '2.9.0',
             circle_image_view: '3.1.0',
+            picasso          : '2.71828',
             shimmer          : '0.5.0',
 
             junit            : '4.12',
@@ -77,7 +78,8 @@ ext {
     third_deps = [
             retrofit         : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
             retrofit_gson    : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
-            circle_image_view: "de.hdodenhof:circleimageview:${versions.circle_image_view}"
+            circle_image_view: "de.hdodenhof:circleimageview:${versions.circle_image_view}",
+            picasso          : "com.squareup.picasso:picasso:${versions.picasso}"
     ]
 
     test_deps = [

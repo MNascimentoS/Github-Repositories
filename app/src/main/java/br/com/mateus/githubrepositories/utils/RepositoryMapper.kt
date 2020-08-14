@@ -6,5 +6,7 @@ import br.com.mateus.githubrepositories.domain.Repository
 fun Item.toRepository() =
     Repository(
         id = id,
-        name = name
+        name = name,
+        description = description,
+        imageUrl = owner.avatar_url
     )

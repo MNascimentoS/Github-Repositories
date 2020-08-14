@@ -1,4 +1,4 @@
-package br.com.mateus.githubrepositories.api
+package br.com.mateus.githubrepositories.di
 
 import br.com.mateus.githubrepositories.domain.JsonRepository
 import br.com.mateus.githubrepositories.domain.Repository
@@ -11,8 +11,17 @@ interface GithubAPI {
     @GET("/search/repositories")
     fun getRepositoryList(
         @Query("page") page: Int,
+        @Query("per_page") loadSize: Int,
         @Query("q") language: String = "language:kotlin",
         @Query("sort") sort: String = "stars"
     ): Call<JsonRepository>
+
+    @GET("/search/repositories")
+    suspend fun getRepositories(
+        @Query("page") page: Int,
+        @Query("per_page") loadSize: Int,
+        @Query("q") language: String = "language:kotlin",
+        @Query("sort") sort: String = "stars"
+    ): JsonRepository
 
 }

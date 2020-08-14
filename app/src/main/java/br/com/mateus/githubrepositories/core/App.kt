@@ -1,9 +1,11 @@
 package br.com.mateus.githubrepositories.core
 
 import android.app.Application
-import br.com.mateus.githubrepositories.api.RetrofitConfig
-import br.com.mateus.githubrepositories.dataSource.RepositoryDataSourceFactory
-import br.com.mateus.githubrepositories.scenes.repositoryList.viewmodel.RepositoryViewModel
+import br.com.mateus.githubrepositories.di.RetrofitConfig
+import br.com.mateus.githubrepositories.di.dataSource.RepositoryDataSourceFactory
+import br.com.mateus.githubrepositories.di.repository.GitRepository
+import br.com.mateus.githubrepositories.di.repository.GitRepositoryImpl
+import br.com.mateus.githubrepositories.viewmodel.RepositoryViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -16,17 +18,12 @@ class App : Application() {
         startKoin {
             modules(listOf(
                 module {
-                    single {
-                        RepositoryDataSourceFactory()
-                    }
+                    single { CoroutineContextProvider() }
+                    single { RepositoryDataSourceFactory() }
+                    single { RetrofitConfig() }
+                    single<GitRepository> { GitRepositoryImpl() }
 
-                    single {
-                        RetrofitConfig()
-                    }
-
-                    viewModel {
-                        RepositoryViewModel()
-                    }
+                    viewModel { RepositoryViewModel() }
                 }
             ))
         }

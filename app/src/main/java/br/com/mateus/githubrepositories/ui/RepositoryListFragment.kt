@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.mateus.githubrepositories.R
+import br.com.mateus.githubrepositories.ui.RepositoryActivity.Companion.CARD_TRANSITION
 import br.com.mateus.githubrepositories.utils.observe
 import br.com.mateus.githubrepositories.viewmodel.RepositoryViewModel
 import kotlinx.android.synthetic.main.fragment_repository_list.*
@@ -32,11 +33,23 @@ class RepositoryListFragment : Fragment() {
     }
 
     private fun initUi() {
-        repositoryRecyclerAdapter = RepositoryRecyclerAdapter { repository ->
-            findNavController(repositoryRCL).navigate(RepositoryListFragmentDirections.actionRepositoryListFragmentToRepositoryDetailsFragment(repository))
+        repositoryRecyclerAdapter = RepositoryRecyclerAdapter { repository, view ->
+//            ViewCompat.setTransitionName(avatarIMG, AVATAR_LOGO);
+            view.transitionName = CARD_TRANSITION
+            val extras = FragmentNavigatorExtras(
+                view to CARD_TRANSITION
+            )
+            findNavController(repositoryRCL)
+                .navigate(
+                    RepositoryListFragmentDirections.actionRepositoryListFragmentToRepositoryDetailsFragment(
+                        repository
+                    ),
+                    extras
+                )
         }
 
-        repositoryRCL?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        repositoryRCL?.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         repositoryRCL?.adapter = repositoryRecyclerAdapter
     }
 

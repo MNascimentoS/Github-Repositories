@@ -1,6 +1,7 @@
 package br.com.mateus.githubrepositories.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,7 @@ import br.com.mateus.githubrepositories.domain.Repository
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_github_repository.view.*
 
-class RepositoryRecyclerAdapter(private val onItemSelected: ((repository: Repository) -> Unit)) :
+class RepositoryRecyclerAdapter(private val onItemSelected: ((repository: Repository, view: View) -> Unit)) :
     PagedListAdapter<Repository, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -20,11 +21,11 @@ class RepositoryRecyclerAdapter(private val onItemSelected: ((repository: Reposi
         val repositoryItem = getItem(position)
         repositoryItem?.let { repository ->
             with(holder.itemView) {
-                nameTXT?.text = repository.name
+                nameTXT?.text = repository.name.capitalize()
                 descriptionTXT?.text = repository.description
                 Picasso.get().load(repository.imageUrl).into(avatarIMG)
-                repositoryFL?.setOnClickListener {
-                    onItemSelected(repository)
+                cardView?.setOnClickListener {
+                    onItemSelected(repository, it)
                 }
             }
         }

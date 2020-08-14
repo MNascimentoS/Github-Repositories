@@ -9,6 +9,7 @@
     <dimen name="normal_margin">8dp</dimen>
     <dimen name="large_margin">16dp</dimen>
 
+    <dimen name="small_icon_size">20dp</dimen>
     <dimen name="small_avatar_size">40dp</dimen>
 
 </resources>

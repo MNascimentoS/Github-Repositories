@@ -8,5 +8,12 @@ data class Repository (
     val id: Int,
     val name: String,
     val description: String?,
-    val imageUrl: String
+    val ownerName: String,
+    val ownerType: String,
+    val imageUrl: String,
+    val repositoryUrl: String,
+    val stars: Int,
+    val issues: Int,
+    val watchers: Int,
+    val forks: Int
 ) : Parcelable

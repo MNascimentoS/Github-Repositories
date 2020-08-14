@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Github Repositories</string>
+    <string name="open_repository">Abrir Repositório</string>
+    <string name="x_amount_stars">%1d Estrelas</string>
+    <string name="x_amount_watchers">%1d Watchers</string>
+    <string name="x_amount_issues">%1d Issues</string>
+    <string name="x_amount_forks">%1d Forks</string>
+
+    <string name="cd_amount_issues_rep">Quantidade de issues do repositório</string>
+    <string name="cd_amount_forks_rep">Quantidade de forks do repositório</string>
+    <string name="cd_amount_stars_rep">Quantidade de stars do repositório</string>
+    <string name="cd_amount_watchers_rep">Quantidade de watchers do repositório</string>
 </resources>

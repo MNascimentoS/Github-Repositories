@@ -24,13 +24,14 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/large_padding">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/avatarIMG"
                 android:layout_width="@dimen/small_avatar_size"
                 android:layout_height="@dimen/small_avatar_size"
+                style="@style/Widget.App.ShapeableImageView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@tools:sample/avatars"/>
 
             <TextView
                 android:id="@+id/nameTXT"

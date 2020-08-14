@@ -1,4 +1,4 @@
-package br.com.mateus.githubrepositories.di
+package br.com.mateus.githubrepositories.di.api
 
 import br.com.mateus.githubrepositories.domain.Repository
 import com.google.gson.*

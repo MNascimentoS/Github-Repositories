@@ -1,7 +1,7 @@
 package br.com.mateus.githubrepositories.core
 
 import android.app.Application
-import br.com.mateus.githubrepositories.di.RetrofitConfig
+import br.com.mateus.githubrepositories.di.api.RetrofitConfig
 import br.com.mateus.githubrepositories.di.dataSource.RepositoryDataSourceFactory
 import br.com.mateus.githubrepositories.di.repository.GitRepository
 import br.com.mateus.githubrepositories.di.repository.GitRepositoryImpl

@@ -37,10 +37,15 @@ class RepositoryActivity : AppCompatActivity() {
             if (loading) progressBar?.visible()
             else progressBar?.gone()
         }
+        observe(repositoryViewModel.hasItems) { hasItem ->
+            if (hasItem) errorMessageTXT?.gone()
+            else errorMessageTXT?.visible()
+        }
     }
 
     companion object {
-        const val CARD_TRANSITION = "card"
+        const val CARD_TRANSITION_START = "card_start"
+        const val CARD_TRANSITION_END = "card_end"
     }
 
 }

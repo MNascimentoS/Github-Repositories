@@ -86,7 +86,7 @@ platform :android do
     upload_to_play_store(track: options[:track], apk_paths: ["app/build/outputs/apk/release/ib-release.apk"])
   end
 
-  lane :post_to_slack do |options|
+      lane :post_to_slack do |options|
     slack_url   = options[:slack_url]
     app         = options[:app]
     version     = options[:version]

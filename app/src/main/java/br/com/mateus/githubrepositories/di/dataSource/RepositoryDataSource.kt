@@ -1,6 +1,5 @@
 package br.com.mateus.githubrepositories.di.dataSource
 
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import br.com.mateus.githubrepositories.core.CoroutineContextProvider
 import br.com.mateus.githubrepositories.di.repository.GitRepository
@@ -17,7 +16,6 @@ class RepositoryDataSource: PageKeyedDataSource<Int, Repository>(), KoinComponen
     private val contextProvider by inject<CoroutineContextProvider>()
     private val scope = CoroutineScope(Job() + contextProvider.io)
 
-
     private var page = 1
 
     override fun loadInitial(
@@ -25,17 +23,25 @@ class RepositoryDataSource: PageKeyedDataSource<Int, Repository>(), KoinComponen
         callback: LoadInitialCallback<Int, Repository>
     ) {
         scope.launch {
-            val repositories = gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
-            page++
-            callback.onResult(repositories, null, page)
+            try {
+                val repositories = gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
+                page++
+                callback.onResult(repositories, null, page)
+            } catch (ex: Exception) {
+                callback.onResult(arrayListOf(), null, null)
+            }
         }
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {
         scope.launch {
-            val repositories = gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
-            page++
-            callback.onResult(repositories, page)
+            try {
+                val repositories = gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
+                page++
+                callback.onResult(repositories, page)
+            } catch (ex: Exception) {
+                callback.onResult(arrayListOf(), page)
+            }
         }
     }
 

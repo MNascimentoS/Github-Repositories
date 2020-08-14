@@ -7,7 +7,7 @@ import br.com.mateus.githubrepositories.domain.Repository
 class RepositoryDataSourceFactory : DataSource.Factory<Int, Repository>() {
 
     private var repositoryDataSource: RepositoryDataSource? = null
-    var mutableLiveData: MutableLiveData<RepositoryDataSource>? = null
+    private var mutableLiveData: MutableLiveData<RepositoryDataSource>? = null
 
     init {
         mutableLiveData = MutableLiveData()

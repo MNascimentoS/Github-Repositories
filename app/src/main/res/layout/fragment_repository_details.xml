@@ -32,17 +32,17 @@
         android:layout_height="@dimen/small_icon_size"
         android:layout_marginTop="@dimen/large_margin"
         android:contentDescription="@string/cd_amount_stars_rep"
+        android:src="@drawable/ic_stars"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repositoryDetailsTXT"
-        android:src="@drawable/ic_stars" />
+        app:layout_constraintTop_toBottomOf="@+id/repositoryDetailsTXT" />
 
     <TextView
         android:id="@+id/starsTXT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginEnd="@dimen/normal_margin"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/starIMG"
         app:layout_constraintTop_toTopOf="@+id/starIMG"
@@ -54,17 +54,17 @@
         android:layout_height="@dimen/small_icon_size"
         android:layout_marginTop="@dimen/large_margin"
         android:contentDescription="@string/cd_amount_issues_rep"
+        android:src="@drawable/ic_warning"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/starIMG"
-        android:src="@drawable/ic_warning" />
+        app:layout_constraintTop_toBottomOf="@+id/starIMG" />
 
     <TextView
         android:id="@+id/issuesTXT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginEnd="@dimen/normal_margin"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/issuesIMG"
         app:layout_constraintTop_toTopOf="@+id/issuesIMG"
@@ -84,9 +84,9 @@
         android:id="@+id/forkTXT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginEnd="@dimen/normal_margin"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/forkIMG"
         app:layout_constraintTop_toTopOf="@+id/forkIMG"
@@ -106,9 +106,9 @@
         android:id="@+id/watchersTXT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
         android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginEnd="@dimen/normal_margin"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/watchersIMG"
         app:layout_constraintTop_toTopOf="@+id/watchersIMG"
@@ -121,7 +121,7 @@
         android:layout_marginTop="@dimen/large_margin"
         android:layout_marginBottom="@dimen/small_margin"
         android:clipToPadding="false"
-        android:transitionName="card"
+        android:transitionName="card_end"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,8 +133,9 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/large_padding">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/avatarIMG"
+                style="@style/Widget.App.ShapeableImageView"
                 android:layout_width="@dimen/small_avatar_size"
                 android:layout_height="@dimen/small_avatar_size"
                 app:layout_constraintStart_toStartOf="parent"
@@ -172,6 +173,7 @@
 
     <Button
         android:id="@+id/openRepositoryBTN"
+        style="@style/ButtonDefault"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"

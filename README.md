@@ -8,7 +8,7 @@ O Projeto Github Repositories tem como objetivo consultar a API aberta do Github
 ## Download
 O app está disponível para download no *AppCenter* pelo seguinte link:
 
-[Link para Download](https://install.appcenter.ms/orgs/Mateus-Nascimento/apps/Git-Repository)
+[Link para Download](https://install.appcenter.ms/orgs/mateus-nascimento/apps/git-repository/distribution_groups/testadores)
 
 ## Tecnologias Utilizadas
 

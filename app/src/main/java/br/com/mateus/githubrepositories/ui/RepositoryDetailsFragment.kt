@@ -47,9 +47,9 @@ class RepositoryDetailsFragment : Fragment() {
         repositoryDetailsTXT?.text = repository.description
 
         starsTXT?.text = getString(R.string.x_amount_stars, repository.stars)
-        issuesTXT?.text = getString(R.string.x_amount_stars, repository.issues)
-        forkTXT?.text = getString(R.string.x_amount_stars, repository.forks)
-        watchersTXT?.text = getString(R.string.x_amount_stars, repository.watchers)
+        issuesTXT?.text = getString(R.string.x_amount_issues, repository.issues)
+        forkTXT?.text = getString(R.string.x_amount_forks, repository.forks)
+        watchersTXT?.text = getString(R.string.x_amount_watchers, repository.watchers)
 
         nameTXT?.text = repository.ownerName
         descriptionTXT?.text = repository.ownerType

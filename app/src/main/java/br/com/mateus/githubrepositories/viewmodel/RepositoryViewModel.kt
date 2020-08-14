@@ -20,9 +20,14 @@ class RepositoryViewModel : ViewModel(), KoinComponent {
     var selectedRepository: Repository? = null
 
     private val _isLoading = MutableLiveData<Boolean>()
-    private val isLoading: LiveData<Boolean> = _isLoading
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _hasItems = MutableLiveData<Boolean>()
+    val hasItems: LiveData<Boolean> = _hasItems
 
     init {
+        _isLoading.value = true
+
         val executor = Executors.newFixedThreadPool(EXECUTOR_THREAD_SIZE)
 
         repositoryDataSourceFactory.mutableLiveData?.observeForever { dataSource ->
@@ -42,7 +47,7 @@ class RepositoryViewModel : ViewModel(), KoinComponent {
                 override fun onZeroItemsLoaded() {
                     super.onZeroItemsLoaded()
                     _isLoading.value = false
-//                    _hasItems.value = false
+                    _hasItems.value = false
                 }
 
                 override fun onItemAtEndLoaded(itemAtEnd: Repository) {

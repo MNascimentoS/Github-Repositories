@@ -6,4 +6,6 @@ interface GitRepository {
 
     suspend fun getGitRepositoryList(pagePos: Int, pageSize: Int) : List<Repository>
 
+    suspend fun getGitRepositoryListFromSearch(search: String, pagePos: Int, pageSize: Int) : List<Repository>
+
 }

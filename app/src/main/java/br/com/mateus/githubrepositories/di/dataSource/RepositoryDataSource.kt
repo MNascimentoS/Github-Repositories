@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class RepositoryDataSource: PageKeyedDataSource<Int, Repository>(), KoinComponent {
+class RepositoryDataSource(private val searchValue: String?): PageKeyedDataSource<Int, Repository>(), KoinComponent {
 
     private val gitRepository by inject<GitRepository>()
     private val contextProvider by inject<CoroutineContextProvider>()
@@ -24,7 +24,8 @@ class RepositoryDataSource: PageKeyedDataSource<Int, Repository>(), KoinComponen
     ) {
         scope.launch {
             try {
-                val repositories = gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
+                val repositories = if (searchValue != null) gitRepository.getGitRepositoryListFromSearch(searchValue!!, page, params.requestedLoadSize)
+                    else gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
                 page++
                 callback.onResult(repositories, null, page)
             } catch (ex: Exception) {
@@ -36,7 +37,8 @@ class RepositoryDataSource: PageKeyedDataSource<Int, Repository>(), KoinComponen
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Repository>) {
         scope.launch {
             try {
-                val repositories = gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
+                val repositories = if (searchValue != null) gitRepository.getGitRepositoryListFromSearch(searchValue!!, page, params.requestedLoadSize)
+                else gitRepository.getGitRepositoryList(page, params.requestedLoadSize)
                 page++
                 callback.onResult(repositories, page)
             } catch (ex: Exception) {

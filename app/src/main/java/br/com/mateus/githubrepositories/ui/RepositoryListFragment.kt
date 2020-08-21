@@ -29,6 +29,11 @@ class RepositoryListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            val search = RepositoryListFragmentArgs.fromBundle(arguments!!).searchValue
+            if (!search.isNullOrBlank()) repositoryViewModel.searchRepository(search)
+            else repositoryViewModel.searchRepository(null)
+        }
         initUi()
         initObserver()
     }

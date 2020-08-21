@@ -13,7 +13,7 @@ import java.util.concurrent.Executors
 
 class RepositoryViewModel : ViewModel(), KoinComponent {
 
-    val repositoryDataSourceFactory by inject<RepositoryDataSourceFactory>()
+    private val repositoryDataSourceFactory by inject<RepositoryDataSourceFactory>()
 
     private val _isLoading = MutableLiveData<Boolean>(true)
     val isLoading: LiveData<Boolean> = _isLoading
@@ -21,8 +21,16 @@ class RepositoryViewModel : ViewModel(), KoinComponent {
     private val _hasItems = MutableLiveData<Boolean>()
     val hasItems: LiveData<Boolean> = _hasItems
 
-    var repositoryList =
-        LivePagedListBuilder<Int, Repository>(repositoryDataSourceFactory, PAGE_SIZE)
+    lateinit var repositoryList: LiveData<PagedList<Repository>>
+
+    fun searchRepository(search: String?) {
+        repositoryDataSourceFactory.searchRepository(search)
+        initItemList()
+    }
+
+    private fun initItemList() {
+        _isLoading.value = true
+        repositoryList = LivePagedListBuilder<Int, Repository>(repositoryDataSourceFactory, PAGE_SIZE)
             .setFetchExecutor(Executors.newFixedThreadPool(EXECUTOR_THREAD_SIZE))
             .setBoundaryCallback(object : PagedList.BoundaryCallback<Repository>() {
                 override fun onZeroItemsLoaded() {
@@ -44,6 +52,7 @@ class RepositoryViewModel : ViewModel(), KoinComponent {
                 }
             })
             .build()
+    }
 
     fun refreshList() {
         repositoryList.value?.dataSource?.invalidate()

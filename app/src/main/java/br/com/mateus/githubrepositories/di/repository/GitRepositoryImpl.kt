@@ -17,4 +17,14 @@ class GitRepositoryImpl : GitRepository, KoinComponent  {
         repositoryList?.let { return it } ?: run { throw Exception() }
     }
 
+    override suspend fun getGitRepositoryListFromSearch(
+        search: String,
+        pagePos: Int,
+        pageSize: Int
+    ): List<Repository> {
+        val jsonRepository = retrofitConfig.getRepositoryAPI()?.getSearchRepositories(search, pagePos, pageSize)
+        val repositoryList = jsonRepository?.items?.map { it.toRepository() }
+        repositoryList?.let { return it } ?: run { throw Exception() }
+    }
+
 }

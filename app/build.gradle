@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "br.com.mateus.githubrepositories"
 
-        versionCode 7
+        versionCode 8
         versionName "1.0.1"
 
         minSdkVersion minSDKVersionValue
@@ -37,6 +37,10 @@ android {
         debug {
             testCoverageEnabled true
         }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 

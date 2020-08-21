@@ -14,4 +14,11 @@ interface GithubAPI {
         @Query("sort") sort: String = "stars"
     ): JsonRepository
 
+    @GET("/search/repositories")
+    suspend fun getSearchRepositories(
+        @Query("q") language: String,
+        @Query("page") page: Int,
+        @Query("per_page") loadSize: Int
+    ): JsonRepository
+
 }

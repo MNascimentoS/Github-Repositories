@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Github Repositories</string>
+    <string name="search_hint">Pesquisar&#8230;</string>
     <string name="open_repository">Abrir Repositório</string>
     <string name="x_amount_stars">%1d Estrelas</string>
     <string name="x_amount_watchers">%1d Watchers</string>

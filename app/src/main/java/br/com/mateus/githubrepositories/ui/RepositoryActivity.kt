@@ -48,18 +48,22 @@ class RepositoryActivity : AppCompatActivity() {
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(search: String?): Boolean {
-                    navController.navigate(
-                        RepositoryListFragmentDirections.actionRepositoryListFragmentSelf(
-                            search
+                    if (navController.currentDestination?.id == R.id.repositoryListFragment) {
+                        navController.navigate(
+                            RepositoryListFragmentDirections.actionRepositoryListFragmentSelf(
+                                search
+                            )
                         )
-                    )
+                    }
                     return true
                 }
 
                 override fun onQueryTextChange(search: String?): Boolean {
-                    if (search.isNullOrBlank()) navController.navigate(
-                        RepositoryListFragmentDirections.actionRepositoryListFragmentSelf(null)
-                    )
+                    if (navController.currentDestination?.id == R.id.repositoryListFragment) {
+                        if (search.isNullOrBlank()) navController.navigate(
+                            RepositoryListFragmentDirections.actionRepositoryListFragmentSelf(null)
+                        )
+                    }
                     return true
                 }
             })
